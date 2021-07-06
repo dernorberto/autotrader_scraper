@@ -109,10 +109,19 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 							car["link"] = "https://www.autotrader.co.uk" + article.find("a", {"class": "tracking-standard-link"})["href"][: article.find("a", {"class": "tracking-standard-link"})["href"].find("?")]
 							car["price"] = article.find("div", {"class": "product-card-pricing__price"}).text.strip()
 							##car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text.split("(")[1].replace(")","")
-							car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text.split("miles)")[0][-4:].split("(")[1].strip()
+							##car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text.split("miles)")[0][-4:].split("(")[1].strip()
+							##car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text
+
+							location_list = article.find("ul", {"class": "product-card-seller-info__specs"}).find_all("li")
+							
+							for location_li in location_list:
+								location = location_li.text
+								if any(keyword in location for keyword in keywords["location"]):
+									car["location"] = int(location[:location.find("miles")])
+
 
 							key_specs_bs_list = article.find("ul", {"class": "listing-key-specs"}).find_all("li")
-							
+
 							for key_spec_bs_li in key_specs_bs_list:
 
 								key_spec_bs = key_spec_bs_li.text
