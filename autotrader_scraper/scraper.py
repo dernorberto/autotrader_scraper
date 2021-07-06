@@ -27,6 +27,8 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 	keywords["ULEZ"] = ["ULEZ"]
 	keywords["year"] = [" reg)"]
 	keywords["engine"] = ["engine"]
+	keywords["type"] = ["type"]
+	keywords["description"] = ["description"]
 
 	# Set up parameters for query to autotrader.co.uk
 
@@ -130,6 +132,10 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 									car["year"] = key_spec_bs
 								elif key_spec_bs[1] == "." and key_spec_bs[3] == "L":
 									car["engine"] = key_spec_bs
+								elif any(keyword in key_spec_bs for keyword in keywords["title"]):
+									car["title"] = key_spec_bs
+								elif any(keyword in key_spec_bs for keyword in keywords["description"]):
+									car["description"] = key_spec_bs
 
 							results.append(car)
 							n_this_year_results = n_this_year_results + 1
