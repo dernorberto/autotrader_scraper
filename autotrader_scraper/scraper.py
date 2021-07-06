@@ -28,6 +28,7 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 	keywords["year"] = [" reg)"]
 	keywords["engine"] = ["engine"]
 	keywords["title"] = ["title"]
+	keywords["distance"] = ["distance"]
 
 	# Set up parameters for query to autotrader.co.uk
 
@@ -107,6 +108,7 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 							car["title"] = article.find("p", {"class": "product-card-details__subtitle"}).text.strip()				
 							car["link"] = "https://www.autotrader.co.uk" + article.find("a", {"class": "tracking-standard-link"})["href"][: article.find("a", {"class": "tracking-standard-link"})["href"].find("?")]
 							car["price"] = article.find("div", {"class": "product-card-pricing__price"}).text.strip()
+							car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).find(" miles)")
 
 							key_specs_bs_list = article.find("ul", {"class": "listing-key-specs"}).find_all("li")
 							
@@ -166,7 +168,7 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 ### Output functions ###
 
 def save_csv(results = [], filename = "scraper_output.csv"):
-	csv_columns = ["name", "title", "link", "price", "mileage", "transmission", "engine", "fuel", "owners",  "ULEZ", "year" ]
+	csv_columns = ["name", "title", "link", "price", "mileage", "transmission", "engine", "fuel", "owners", "ULEZ", "year", "distance" ]
 
 	with open(filename, "w", newline='') as f:
 		writer = csv.DictWriter(f, fieldnames=csv_columns)
