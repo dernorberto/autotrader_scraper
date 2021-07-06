@@ -28,7 +28,6 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 	keywords["year"] = [" reg)"]
 	keywords["engine"] = ["engine"]
 	keywords["title"] = ["title"]
-	keywords["description"] = ["description"]
 
 	# Set up parameters for query to autotrader.co.uk
 
@@ -167,7 +166,7 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 ### Output functions ###
 
 def save_csv(results = [], filename = "scraper_output.csv"):
-	csv_columns = ["name", "link", "price", "mileage", "BHP", "transmission", "fuel", "owners", "body", "ULEZ", "engine", "year"]
+	csv_columns = ["name", "link", "price", "mileage", "BHP", "transmission", "fuel", "owners", "body", "ULEZ", "engine", "year", "title"]
 
 	with open(filename, "w", newline='') as f:
 		writer = csv.DictWriter(f, fieldnames=csv_columns)
