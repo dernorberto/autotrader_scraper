@@ -116,16 +116,16 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 
 								if any(keyword in key_spec_bs for keyword in keywords["mileage"]):
 									car["mileage"] = int(key_spec_bs[:key_spec_bs.find(" miles")].replace(",",""))
-								elif any(keyword in key_spec_bs for keyword in keywords["BHP"]):
-									car["BHP"] = int(key_spec_bs[:key_spec_bs.find("BHP")])
+								#elif any(keyword in key_spec_bs for keyword in keywords["BHP"]):
+								#	car["BHP"] = int(key_spec_bs[:key_spec_bs.find("BHP")])
 								elif any(keyword in key_spec_bs for keyword in keywords["transmission"]):
 									car["transmission"] = key_spec_bs
 								elif any(keyword in key_spec_bs for keyword in keywords["fuel"]):
 									car["fuel"] = key_spec_bs
 								elif any(keyword in key_spec_bs for keyword in keywords["owners"]):
 									car["owners"] = int(key_spec_bs[:key_spec_bs.find(" owners")])
-								elif any(keyword in key_spec_bs for keyword in keywords["body"]):
-									car["body"] = key_spec_bs
+								#elif any(keyword in key_spec_bs for keyword in keywords["body"]):
+							#		car["body"] = key_spec_bs
 								elif any(keyword in key_spec_bs for keyword in keywords["ULEZ"]):
 									car["ULEZ"] = key_spec_bs
 								elif any(keyword in key_spec_bs for keyword in keywords["year"]):
@@ -166,7 +166,7 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 ### Output functions ###
 
 def save_csv(results = [], filename = "scraper_output.csv"):
-	csv_columns = ["name", "link", "price", "mileage", "BHP", "transmission", "fuel", "owners", "body", "ULEZ", "engine", "year", "title"]
+	csv_columns = ["name", "title", "link", "price", "mileage", "transmission", "engine", "fuel", "owners",  "ULEZ", "year" ]
 
 	with open(filename, "w", newline='') as f:
 		writer = csv.DictWriter(f, fieldnames=csv_columns)
