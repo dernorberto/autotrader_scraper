@@ -108,19 +108,13 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 							car["title"] = article.find("p", {"class": "product-card-details__subtitle"}).text.strip()				
 							car["link"] = "https://www.autotrader.co.uk" + article.find("a", {"class": "tracking-standard-link"})["href"][: article.find("a", {"class": "tracking-standard-link"})["href"].find("?")]
 							car["price"] = article.find("div", {"class": "product-card-pricing__price"}).text.strip()
-							##car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text.split("(")[1].replace(")","")
-							##car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text.split("miles)")[0][-4:].split("(")[1].strip()
-							##car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text
-							car["distance"] = article.find_all("ul", {"class": "product-card-seller-info__specs"})[-1].getText().find("miles")
 
-
-							#distance_list = article.find("ul", {"class": "product-card-seller-info__specs"}).find_all("li")
-							
-							#for distance_li in distance_list:
-						#		distance_item = distance_li.text
-					#			if any(keyword in distance_item for keyword in keywords["distance"]):
-				#					car["distance"] = int(distance_item[:distance_item.find("miles")].replace(",",""))
-
+							distance_list = article.find("ul", {"class": "product-card-seller-info__specs"}).find_all("li")
+							items_list=[]
+							for items in distance_list:
+								items_list.append(items.text)
+							myitem=str(items_list[-1])
+							car["distance"] = myitem[myitem.find("(")+1:myitem.find("miles)")-1]
 
 							key_specs_bs_list = article.find("ul", {"class": "listing-key-specs"}).find_all("li")
 
