@@ -111,7 +111,7 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 							##car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text.split("(")[1].replace(")","")
 							##car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text.split("miles)")[0][-4:].split("(")[1].strip()
 							##car["distance"] = article.find("li", {"class": "product-card-seller-info__spec-item atc-type-picanto"}).text
-							car["distance"] = article.find("ul", {"class": "product-card-seller-info__specs"}).text.split("miles)")[0][-4:].split("(")[1].strip()
+							car["distance"] = article.find("ul", {"class": "product-card-seller-info__specs"})[-1].get_text()
 
 
 							#distance_list = article.find("ul", {"class": "product-card-seller-info__specs"}).find_all("li")
