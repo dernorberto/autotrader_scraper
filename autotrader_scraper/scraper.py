@@ -117,7 +117,7 @@ def get_cars(make="BMW", model="5 SERIES", postcode="SW1A 0AA", radius=1500, min
 							for distance_li in distance_list:
 								distance_item = distance_li.text
 								if any(keyword in distance_item for keyword in keywords["distance"]):
-									car["distance"] = int(distance_item[:distance_item.find("miles")]).replace(",",""))
+									car["distance"] = int(distance_item[:distance_item.find("miles")].replace(",",""))
 
 
 							key_specs_bs_list = article.find("ul", {"class": "listing-key-specs"}).find_all("li")
